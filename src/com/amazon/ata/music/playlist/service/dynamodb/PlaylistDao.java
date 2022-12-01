@@ -1,8 +1,11 @@
 package com.amazon.ata.music.playlist.service.dynamodb;
 
+import com.amazon.ata.music.playlist.service.activity.CreatePlaylistActivity;
 import com.amazon.ata.music.playlist.service.dynamodb.models.Playlist;
 import com.amazon.ata.music.playlist.service.exceptions.PlaylistNotFoundException;
 
+import com.amazon.ata.music.playlist.service.models.PlaylistModel;
+import com.amazon.ata.music.playlist.service.models.results.CreatePlaylistResult;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 /**
@@ -34,5 +37,11 @@ public class PlaylistDao {
         }
 
         return playlist;
+    }
+
+    public void savePlaylist(String id) {
+        Playlist playlist = this.dynamoDbMapper.load(Playlist.class, id);
+        this.dynamoDbMapper.save(playlist);
+
     }
 }

@@ -10,6 +10,9 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 /**
  * Implementation of the CreatePlaylistActivity for the MusicPlaylistService's CreatePlaylist API.
  *
@@ -46,7 +49,11 @@ public class CreatePlaylistActivity implements RequestHandler<CreatePlaylistRequ
         log.info("Received CreatePlaylistRequest {}", createPlaylistRequest);
 
         return CreatePlaylistResult.builder()
-                .withPlaylist(new PlaylistModel())
+                .withPlaylist(new PlaylistModel.Builder()
+                    .withName(createPlaylistRequest.getName())
+                    .withCustomerId(createPlaylistRequest.getCustomerId())
+                    .withTags(new HashSet<>(createPlaylistRequest.getTags()))
+                    .build())
                 .build();
     }
 }
