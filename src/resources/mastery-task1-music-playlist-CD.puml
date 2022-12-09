@@ -39,6 +39,13 @@ class AlbumTrackNotFoundException {
     + AlbumTrackNotFoundException(String, Throwable)
 }
 
+class PlaylistNotFoundException {
+    - serialVersionUID : long static final
+    + PlaylistNotFoundException(String)
+    + PlaylistNotFoundException(Throwable)
+    + PlaylistNotFoundException(String, Throwable)
+}
+
 class InvalidAttributeValueException {
     - serialVersionUID : long static final
     + InvalidAttributeValueException(String)
@@ -46,12 +53,14 @@ class InvalidAttributeValueException {
     + InvalidAttributeValueException(String, Throwable)
 }
 
-class PlaylistNotFoundException {
+class InvalidAttributeChangeException {
     - serialVersionUID : long static final
-    + PlaylistNotFoundException(String)
-    + PlaylistNotFoundException(Throwable)
-    + PlaylistNotFoundException(String, Throwable)
+    + InvalidAttributeChangeException(String)
+    + InvalidAttributeChangeException(Throwable)
+    + InvalidAttributeChangeException(String, Throwable)
 }
+
+class RuntimeException {}
 
 '*************** Dao Classes ***************
 class AlbumTrackDao {
@@ -107,4 +116,6 @@ CreatePlaylistActivity --> PlaylistDao
 GetPlaylistActivity --> PlaylistDao
 GetPlaylistSongsActivity --> PlaylistDao
 UpdatePlaylistActivity --> PlaylistDao
+InvalidAttributeChangeException --|> RuntimeException
+InvalidAttributeValueException --|> RuntimeException
 @enduml

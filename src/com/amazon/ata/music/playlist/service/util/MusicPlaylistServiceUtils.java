@@ -25,7 +25,7 @@ public final class MusicPlaylistServiceUtils {
             return false;
         }
 
-        return !INVALID_CHARACTER_PATTERN.matcher(stringToValidate).find();
+        return INVALID_CHARACTER_PATTERN.matcher(stringToValidate).find();
     }
 
     public static String generatePlaylistId() {

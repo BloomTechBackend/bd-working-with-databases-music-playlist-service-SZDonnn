@@ -2,11 +2,16 @@ package com.amazon.ata.music.playlist.service.dynamodb;
 
 import com.amazon.ata.music.playlist.service.activity.CreatePlaylistActivity;
 import com.amazon.ata.music.playlist.service.dynamodb.models.Playlist;
+import com.amazon.ata.music.playlist.service.exceptions.InvalidAttributeChangeException;
+import com.amazon.ata.music.playlist.service.exceptions.InvalidAttributeValueException;
 import com.amazon.ata.music.playlist.service.exceptions.PlaylistNotFoundException;
 
 import com.amazon.ata.music.playlist.service.models.PlaylistModel;
 import com.amazon.ata.music.playlist.service.models.results.CreatePlaylistResult;
+import com.amazon.ata.music.playlist.service.util.MusicPlaylistServiceUtils;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+
+import javax.inject.Inject;
 
 /**
  * Accesses data for a playlist using {@link Playlist} to represent the model in DynamoDB.
@@ -19,6 +24,7 @@ public class PlaylistDao {
      *
      * @param dynamoDbMapper the {@link DynamoDBMapper} used to interact with the playlists table
      */
+    @Inject
     public PlaylistDao(DynamoDBMapper dynamoDbMapper) {
         this.dynamoDbMapper = dynamoDbMapper;
     }
@@ -31,17 +37,17 @@ public class PlaylistDao {
      */
     public Playlist getPlaylist(String id) {
         Playlist playlist = this.dynamoDbMapper.load(Playlist.class, id);
-
         if (playlist == null) {
             throw new PlaylistNotFoundException("Could not find playlist with id " + id);
         }
-
         return playlist;
     }
 
-    public void savePlaylist(String id) {
-        Playlist playlist = this.dynamoDbMapper.load(Playlist.class, id);
+    public Playlist savePlaylist(Playlist playlist) {
+        if(playlist == null) {
+            throw new InvalidAttributeValueException();
+        }
         this.dynamoDbMapper.save(playlist);
-
+        return playlist;
     }
 }

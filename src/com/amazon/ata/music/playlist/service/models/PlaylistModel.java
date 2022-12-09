@@ -1,5 +1,7 @@
 package com.amazon.ata.music.playlist.service.models;
 
+import com.amazon.ata.music.playlist.service.dynamodb.models.AlbumTrack;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,6 +13,7 @@ public class PlaylistModel {
     private String customerId;
     private int songCount;
     private List<String> tags;
+    private List<AlbumTrack> songList;
 
     public PlaylistModel() {
 
@@ -22,6 +25,7 @@ public class PlaylistModel {
         this.customerId = builder.customerId;
         this.songCount = builder.songCount;
         this.tags = builder.tags;
+        this.songList = builder.songList;
     }
 
     public String getId() {
@@ -89,6 +93,7 @@ public class PlaylistModel {
                 ", customerId='" + customerId + '\'' +
                 ", songCount=" + songCount +
                 ", tags=" + tags +
+                ", songList=" + songList +
                 '}';
     }
 
@@ -100,6 +105,7 @@ public class PlaylistModel {
         private String customerId;
         private int songCount;
         private List<String> tags;
+        private List<AlbumTrack> songList;
 
         public Builder withId(String idToUse) {
             this.id = idToUse;
@@ -123,6 +129,11 @@ public class PlaylistModel {
 
         public Builder withTags(Set<String> tagsToUse) {
             this.tags = new ArrayList<>(tagsToUse);
+            return this;
+        }
+
+        public Builder withSongList(List<AlbumTrack> songList) {
+            this.songList = songList;
             return this;
         }
 

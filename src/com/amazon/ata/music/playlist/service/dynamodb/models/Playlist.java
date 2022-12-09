@@ -7,6 +7,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ public class Playlist {
     private String customerId;
     private Integer songCount;
     private Set<String> tags;
-    private List<AlbumTrack> songList ;
+    private List<AlbumTrack> songList = new ArrayList<>();
 
     @DynamoDBHashKey(attributeName = "id")
     public String getId() {
@@ -62,8 +63,6 @@ public class Playlist {
     public void setTags(Set<String> tags) {
         this.tags = tags;
     }
-
-
 
     // PARTICIPANTS: You do not need to modify the songList getters/setters or annotations
     @DynamoDBTypeConverted(converter = AlbumTrackLinkedListConverter.class)

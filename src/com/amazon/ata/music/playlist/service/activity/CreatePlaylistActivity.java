@@ -1,5 +1,8 @@
 package com.amazon.ata.music.playlist.service.activity;
 
+import com.amazon.ata.music.playlist.service.converters.ModelConverter;
+import com.amazon.ata.music.playlist.service.dynamodb.models.Playlist;
+import com.amazon.ata.music.playlist.service.exceptions.InvalidAttributeValueException;
 import com.amazon.ata.music.playlist.service.models.requests.CreatePlaylistRequest;
 import com.amazon.ata.music.playlist.service.models.results.CreatePlaylistResult;
 import com.amazon.ata.music.playlist.service.models.PlaylistModel;
@@ -10,8 +13,11 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Implementation of the CreatePlaylistActivity for the MusicPlaylistService's CreatePlaylist API.
@@ -27,6 +33,7 @@ public class CreatePlaylistActivity implements RequestHandler<CreatePlaylistRequ
      *
      * @param playlistDao PlaylistDao to access the playlists table.
      */
+    @Inject
     public CreatePlaylistActivity(PlaylistDao playlistDao) {
         this.playlistDao = playlistDao;
     }
@@ -47,13 +54,15 @@ public class CreatePlaylistActivity implements RequestHandler<CreatePlaylistRequ
     @Override
     public CreatePlaylistResult handleRequest(final CreatePlaylistRequest createPlaylistRequest, Context context) {
         log.info("Received CreatePlaylistRequest {}", createPlaylistRequest);
+        PlaylistModel playlistModel = new PlaylistModel();
+        playlistModel.setId(createPlaylistRequest.getId());
+        playlistModel.setName(createPlaylistRequest.getName());
+        playlistModel.setCustomerId(createPlaylistRequest.getCustomerId());
+        playlistModel.setSongCount(createPlaylistRequest.getSongCount());
+        playlistModel.setTags(createPlaylistRequest.getTags());
 
         return CreatePlaylistResult.builder()
-                .withPlaylist(new PlaylistModel.Builder()
-                    .withName(createPlaylistRequest.getName())
-                    .withCustomerId(createPlaylistRequest.getCustomerId())
-                    .withTags(new HashSet<>(createPlaylistRequest.getTags()))
-                    .build())
+                .withPlaylist(playlistModel)
                 .build();
     }
 }

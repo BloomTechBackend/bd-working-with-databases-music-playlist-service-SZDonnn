@@ -16,6 +16,7 @@ public class ModelConverter {
             .withCustomerId(playlist.getCustomerId())
             .withSongCount(playlist.getSongCount())
             .withTags(playlist.getTags())
+            .withSongList(playlist.getSongList())
             .build();
     }
 }
