@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20f1b1db-0822-410f-90fb-578ca632b4ca" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/dependency/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/activity/AddSongToPlaylistActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/activity/AddSongToPlaylistActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/activity/GetPlaylistSongsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/activity/GetPlaylistSongsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/converters/ModelConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/converters/ModelConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/dynamodb/AlbumTrackDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/dynamodb/AlbumTrackDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/lambda/AddSongToPlaylistActivityProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/lambda/AddSongToPlaylistActivityProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/lambda/CreatePlaylistActivityProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/lambda/CreatePlaylistActivityProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/lambda/GetPlaylistActivityProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/lambda/GetPlaylistActivityProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/lambda/GetPlaylistSongsActivityProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/lambda/GetPlaylistSongsActivityProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/lambda/UpdatePlaylistActivityProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/amazon/ata/music/playlist/service/lambda/UpdatePlaylistActivityProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tst/com/amazon/ata/music/playlist/service/activity/AddSongToPlaylistActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tst/com/amazon/ata/music/playlist/service/activity/AddSongToPlaylistActivityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tst/com/amazon/ata/music/playlist/service/activity/GetPlaylistSongsActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tst/com/amazon/ata/music/playlist/service/activity/GetPlaylistSongsActivityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tst/com/amazon/ata/music/playlist/service/helpers/AlbumTrackTestHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/tst/com/amazon/ata/music/playlist/service/helpers/AlbumTrackTestHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tst/com/amazon/ata/music/playlist/service/helpers/PlaylistTestHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/tst/com/amazon/ata/music/playlist/service/helpers/PlaylistTestHelper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,8 +78,8 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
 }</component>
-  <component name="RunManager" selected="Gradle.MT3IntrospectionTests">
-    <configuration name="CreatePlaylistActivityTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.GetPlaylistSongsActivityTest">
+    <configuration name="AddSongToPlaylistActivityTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -91,7 +92,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;com.amazon.ata.music.playlist.service.activity.CreatePlaylistActivityTest&quot;" />
+            <option value="&quot;com.amazon.ata.music.playlist.service.activity.AddSongToPlaylistActivityTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -101,7 +102,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="GetPlaylistActivityTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="GetPlaylistSongsActivityTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -114,7 +115,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;com.amazon.ata.music.playlist.service.activity.GetPlaylistActivityTest&quot;" />
+            <option value="&quot;com.amazon.ata.music.playlist.service.activity.GetPlaylistSongsActivityTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -193,11 +194,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.MT3IntrospectionTests" />
+        <item itemvalue="Gradle.GetPlaylistSongsActivityTest" />
+        <item itemvalue="Gradle.AddSongToPlaylistActivityTest" />
         <item itemvalue="Gradle.bd-working-with-databases-music-playlist-service-SZDonnn [buildZip]" />
+        <item itemvalue="Gradle.MT3IntrospectionTests" />
         <item itemvalue="Gradle.UpdatePlaylistActivityTest" />
-        <item itemvalue="Gradle.GetPlaylistActivityTest" />
-        <item itemvalue="Gradle.CreatePlaylistActivityTest" />
       </list>
     </recent_temporary>
   </component>

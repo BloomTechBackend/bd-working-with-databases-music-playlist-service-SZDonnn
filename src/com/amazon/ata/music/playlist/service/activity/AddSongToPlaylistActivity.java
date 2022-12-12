@@ -1,5 +1,8 @@
 package com.amazon.ata.music.playlist.service.activity;
 
+import com.amazon.ata.music.playlist.service.converters.ModelConverter;
+import com.amazon.ata.music.playlist.service.dynamodb.models.AlbumTrack;
+import com.amazon.ata.music.playlist.service.dynamodb.models.Playlist;
 import com.amazon.ata.music.playlist.service.models.requests.AddSongToPlaylistRequest;
 import com.amazon.ata.music.playlist.service.models.results.AddSongToPlaylistResult;
 import com.amazon.ata.music.playlist.service.models.SongModel;
@@ -12,7 +15,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Implementation of the AddSongToPlaylistActivity for the MusicPlaylistService's AddSongToPlaylist API.
@@ -52,11 +58,32 @@ public class AddSongToPlaylistActivity implements RequestHandler<AddSongToPlayli
      *                                 API defined {@link SongModel}s
      */
     @Override
-    public AddSongToPlaylistResult handleRequest(final AddSongToPlaylistRequest addSongToPlaylistRequest, Context context) {
+    public AddSongToPlaylistResult handleRequest(final AddSongToPlaylistRequest addSongToPlaylistRequest,
+                                                 Context context) {
         log.info("Received AddSongToPlaylistRequest {} ", addSongToPlaylistRequest);
 
+        Playlist playlist = playlistDao.getPlaylist(addSongToPlaylistRequest.getId());
+        playlistDao.savePlaylist(playlist);
+        AlbumTrack albumTrack = albumTrackDao.getAlbumTrack(addSongToPlaylistRequest.getAsin(),
+                addSongToPlaylistRequest.getTrackNumber());
+
+        List<AlbumTrack> albumTracks = playlist.getSongList();
+        List<SongModel> songModels = new LinkedList<>();
+        for (AlbumTrack album: albumTracks) {
+            SongModel songModel = new ModelConverter().toSongModel(album);
+            songModels.add(songModel);
+        }
+
+
+        SongModel songModel = new ModelConverter().toSongModel(albumTrack);
+        if (addSongToPlaylistRequest.isQueueNext()) {
+            songModels.add(0, songModel);
+        } else {
+            songModels.add(songModel);
+        }
+
         return AddSongToPlaylistResult.builder()
-                .withSongList(Collections.singletonList(new SongModel()))
+                .withSongList(songModels)
                 .build();
     }
 }

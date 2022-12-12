@@ -2,7 +2,9 @@ package com.amazon.ata.music.playlist.service.dynamodb;
 
 import com.amazon.ata.music.playlist.service.dynamodb.models.AlbumTrack;
 
+import com.amazon.ata.music.playlist.service.exceptions.InvalidAttributeValueException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import org.apache.http.impl.client.StandardHttpRequestRetryHandler;
 
 import javax.inject.Inject;
 
@@ -20,5 +22,9 @@ public class AlbumTrackDao {
     @Inject
     public AlbumTrackDao(DynamoDBMapper dynamoDbMapper) {
         this.dynamoDbMapper = dynamoDbMapper;
+    }
+
+    public AlbumTrack getAlbumTrack(String asin, int trackNumber) {
+        return dynamoDbMapper.load(AlbumTrack.class, asin, trackNumber);
     }
 }
