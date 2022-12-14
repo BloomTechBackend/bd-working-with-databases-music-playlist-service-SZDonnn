@@ -68,12 +68,13 @@ public class AddSongToPlaylistActivity implements RequestHandler<AddSongToPlayli
                 addSongToPlaylistRequest.getTrackNumber());
 
         List<AlbumTrack> albumTracks = playlist.getSongList();
+
         List<SongModel> songModels = new LinkedList<>();
+
         for (AlbumTrack album: albumTracks) {
             SongModel songModel = new ModelConverter().toSongModel(album);
             songModels.add(songModel);
         }
-
 
         SongModel songModel = new ModelConverter().toSongModel(albumTrack);
         if (addSongToPlaylistRequest.isQueueNext()) {

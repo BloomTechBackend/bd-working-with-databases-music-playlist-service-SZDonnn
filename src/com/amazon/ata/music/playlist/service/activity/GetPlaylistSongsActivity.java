@@ -58,6 +58,8 @@ public class GetPlaylistSongsActivity implements RequestHandler<GetPlaylistSongs
             getPlaylistSongsRequest.setOrder(SongOrder.DEFAULT);
         } else if (getPlaylistSongsRequest.getOrder() == SongOrder.REVERSED) {
             Collections.reverse(songModelList);
+        } else if (getPlaylistSongsRequest.getOrder() == SongOrder.SHUFFLED) {
+            Collections.shuffle(songModelList);
         }
         return GetPlaylistSongsResult.builder()
                 .withSongList(songModelList)

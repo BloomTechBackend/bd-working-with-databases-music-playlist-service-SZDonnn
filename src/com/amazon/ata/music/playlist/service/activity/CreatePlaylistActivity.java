@@ -54,13 +54,15 @@ public class CreatePlaylistActivity implements RequestHandler<CreatePlaylistRequ
     @Override
     public CreatePlaylistResult handleRequest(final CreatePlaylistRequest createPlaylistRequest, Context context) {
         log.info("Received CreatePlaylistRequest {}", createPlaylistRequest);
-        PlaylistModel playlistModel = new PlaylistModel();
-        playlistModel.setId(createPlaylistRequest.getId());
-        playlistModel.setName(createPlaylistRequest.getName());
-        playlistModel.setCustomerId(createPlaylistRequest.getCustomerId());
-        playlistModel.setSongCount(createPlaylistRequest.getSongCount());
-        playlistModel.setTags(createPlaylistRequest.getTags());
-
+        Playlist playlist = new Playlist();
+        playlist.setId(createPlaylistRequest.getId());
+        playlist.setCustomerId(createPlaylistRequest.getCustomerId());
+        playlist.setName(createPlaylistRequest.getName());
+        playlist.setTags(new HashSet<>(createPlaylistRequest.getTags()));
+        playlist.setSongCount(createPlaylistRequest.getSongCount());
+        playlist.setSongList(createPlaylistRequest.getSongList());
+        playlistDao.savePlaylist(playlist);
+        PlaylistModel playlistModel = new ModelConverter().toPlaylistModel(playlist);
         return CreatePlaylistResult.builder()
                 .withPlaylist(playlistModel)
                 .build();
